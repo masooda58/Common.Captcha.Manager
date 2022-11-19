@@ -44,7 +44,7 @@ namespace Common.Captcha.Manager.ApplicationServics
            };
             
            Random rand = new Random();
-           int maxRand = letters.Length - 1;
+           int maxRand = letters.Length;
 
            StringBuilder sb = new StringBuilder();
 

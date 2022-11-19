@@ -16,7 +16,9 @@ namespace Common.Captcha.Manager.ApplicationServics.Image
             gr.SmoothingMode = SmoothingMode.HighQuality;
             RectangleF recF = new RectangleF(0, 0, captchaImageParams.Width, captchaImageParams.Height);
             Brush br;
-            br = new HatchBrush(HatchStyle.SmallConfetti, Color.LightGray, Color.White);
+            var fColor = System.Drawing.ColorTranslator.FromHtml(captchaImageParams.ForeColor);
+            var bColor = System.Drawing.ColorTranslator.FromHtml(captchaImageParams.BackColor);
+            br = new HatchBrush(HatchStyle.SmallConfetti, fColor, bColor);
             gr.FillRectangle(br, recF);
             SizeF text_size;
             Font the_font;
@@ -39,7 +41,14 @@ namespace Common.Captcha.Manager.ApplicationServics.Image
 
             //Make random warping parameters.
             Random rnd = new Random();
-            PointF[] pts = { new PointF((float)rnd.Next(captchaImageParams.Width) / 4, (float)rnd.Next(captchaImageParams.Height) / 4), new PointF(captchaImageParams.Width - (float)rnd.Next(captchaImageParams.Width) / 4, (float)rnd.Next(captchaImageParams.Height) / 4), new PointF((float)rnd.Next(captchaImageParams.Width) / 4, captchaImageParams.Height - (float)rnd.Next(captchaImageParams.Height) / 4), new PointF(captchaImageParams.Width - (float)rnd.Next(captchaImageParams.Width) / 4, captchaImageParams.Height - (float)rnd.Next(captchaImageParams.Height) / 4) };
+            PointF[] pts =
+            {
+                new PointF
+                    ((float)rnd.Next(captchaImageParams.Width) / 4, (float)rnd.Next(captchaImageParams.Height) / 4),
+                new PointF(captchaImageParams.Width - (float)rnd.Next(captchaImageParams.Width) / 4, (float)rnd.Next(captchaImageParams.Height) / 4), 
+                new PointF((float)rnd.Next(captchaImageParams.Width) / 4, captchaImageParams.Height - (float)rnd.Next(captchaImageParams.Height) / 4), 
+                new PointF(captchaImageParams.Width - (float)rnd.Next(captchaImageParams.Width) / 4, captchaImageParams.Height - (float)rnd.Next(captchaImageParams.Height) / 4)
+            };
             Matrix mat = new Matrix();
             graphics_path.Warp(pts, recF, mat, WarpMode.Perspective, 0);
 

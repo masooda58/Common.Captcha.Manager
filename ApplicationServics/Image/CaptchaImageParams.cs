@@ -30,7 +30,7 @@ namespace Common.Captcha.Manager.ApplicationServics.Image
         /// <summary>
         /// BackColor of the captcha's text
         /// </summary>
-        public string BackColor { set; get; } = "";
+        public string BackColor { set; get; } = "#2596be";
 
         /// <summary>
         /// FontSize of the captcha's text
